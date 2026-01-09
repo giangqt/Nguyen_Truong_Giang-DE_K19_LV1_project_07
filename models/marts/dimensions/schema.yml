@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: fact_sales_order_tt
+    description: "Fact table containing successful checkout events"
+    columns:
+      - name: sk_fact_sales
+        tests: [unique, not_null]
+      - name: product_id
+        tests: [not_null, {relationships: {to: ref('dim_product'), field: product_id}}]
+      - name: user_id
+        tests: [not_null, {relationships: {to: ref('dim_customer'), field: user_id}}]
+      - name: location_id
+        tests: [{relationships: {to: ref('dim_location'), field: location_id}}]
+
+  - name: dim_customer
+    columns:
+      - name: user_id
+        tests: [unique, not_null]
+
+  - name: dim_product
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: dim_location
+    columns:
+      - name: location_id
+        tests: [unique, not_null]

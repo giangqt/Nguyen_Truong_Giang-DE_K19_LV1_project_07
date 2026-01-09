@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: glamira_raw
+    database: stone-album-475912-b9
+    schema: raw_layer
+    tables:
+      - name: summary
+        description: "Raw event data containing orders, traffic, and user info"
+      - name: product
+        description: "Product catalog with min/max prices"
+      - name: ip_location
+        description: "IP address mapping to City/Country"
