@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw_layer
+    database: stone-album-475912-b9   # GCP project
+    schema: raw_layer                 # BigQuery dataset
+    tables:
+      - name: summary
+        description: "Raw event-level ecommerce data from Glamira"
