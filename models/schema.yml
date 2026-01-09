@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  # -------------------------
+  # Dimensions
+  # -------------------------
+  - name: dim_customer
+    columns:
+      - name: customer_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_store
+    columns:
+      - name: store_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_product
+    columns:
+      - name: product_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_device
+    columns:
+      - name: device_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_traffic
+    columns:
+      - name: traffic_key
+        tests:
+          - unique
+          - not_null
+
+  # -------------------------
+  # Fact Table
+  # -------------------------
+  - name: fact_sales_order_tt
+    columns:
+      - name: sk_fact_sales
+        tests:
+          - unique
+          - not_null
+
+      # Relationship Tests: Ensure every key in Fact exists in Dimension
+      - name: store_key
+        tests:
+          - relationships:
+              to: ref('dim_store')
+              field: store_key
+
+      - name: product_key
+        tests:
+          - relationships:
+              to: ref('dim_product')
+              field: product_key
+
+      - name: customer_key
+        tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_key
+
+      - name: traffic_key
+        tests:
+          - relationships:
+              to: ref('dim_traffic')
+              field: traffic_key
